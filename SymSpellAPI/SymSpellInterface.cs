@@ -15,7 +15,7 @@ namespace SymSpellAPI
 
             //load dictionary
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string dictionaryPath = baseDirectory + "../../../frequency_dictionary_en_82_765.txt";
+            string dictionaryPath = baseDirectory + "frequency_dictionary_en_82_765.txt";
             int termIndex = 0; //column of the term in the dictionary text file
             int countIndex = 1; //column of the term frequency in the dictionary text file
             if (!symSpell.LoadDictionary(dictionaryPath, termIndex, countIndex))
@@ -25,7 +25,7 @@ namespace SymSpellAPI
 
             }
 
-            Console.WriteLine("Initialize");
+            Console.WriteLine("SymSpellInterface was initialized. You are ready to go!");
 
 
         }

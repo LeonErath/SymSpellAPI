@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -14,5 +14,6 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
+COPY SymSpellAPI/frequency_dictionary_en_82_765.txt ./
 COPY --from=build /app/SymSpellAPI/out ./
 ENTRYPOINT ["dotnet", "SymSpellAPI.dll"]
