@@ -1,6 +1,6 @@
 # SymSpellAPI
 
-Welcome to the SymSpell API! This documentation should help you familiarise yourself with the resources available and how to consume them with HTTP requests. Read through the getting started section before you dive in. Most of your problems should be solved just by reading through it.
+Welcome to the SymSpell API! If you don't know what SymSpell is, please check out the awesomme [SymSpell-Spellchecker](https://github.com/wolfgarbe/SymSpell). This documentation should help you familiarise yourself with the resources available and how to consume them with HTTP requests. Read through the getting started section before you dive in. Most of your problems should be solved just by reading through it.
 
 Feel free to suggest any changes or improvements. You can contact me via Githuv or my email address (leon-erath@hotmail.de).
 
