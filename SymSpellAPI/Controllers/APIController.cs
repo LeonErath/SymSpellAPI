@@ -25,23 +25,23 @@ namespace SymSpellAPI.Controllers
         [HttpPost("lookup/json")]
         public List<SymSpell.SuggestItem> lookupJSON([FromBody]JObject data)
         {
-            Console.WriteLine("lookup/json " + data.GetValue("document").Value<string>() +" "+ data.GetValue("distance").Value<int>()+ " "+ data.GetValue("verbosity").Value<int>());
+            
             return SymSpellInterface.Instance.getSuggestions(data.GetValue("document").Value<string>(),  data.GetValue("verbosity").Value<int>(), data.GetValue("distance").Value<int>());
         }
 
         
 
-        [HttpPost("comound/json")]
+        [HttpPost("compound/json")]
         public List<SymSpell.SuggestItem> lookupcompoundJSON([FromBody]JObject data)
         {
-            Console.WriteLine("compound/json - document: " + data.GetValue("document").Value<string>());
+           
             return SymSpellInterface.Instance.correctText(data.GetValue("document").Value<string>(), data.GetValue("distance").Value<int>());
         }
 
         [HttpPost("stemming/json")]
         public (string segmentedString, string correctedString, int distanceSum, decimal probabilityLogSum) wordStemmingJSON([FromBody]JObject data)
         {
-            Console.WriteLine("stemming/json - document: " + data.GetValue("document").Value<string>());
+            
             return SymSpellInterface.Instance.segmentText(data.GetValue("document").Value<string>(), data.GetValue("distance").Value<int>());
         }
     
