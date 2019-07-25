@@ -12,6 +12,8 @@ The Web API implements [SymSpell](https://github.com/wolfgarbe/SymSpell) via the
 git clone https://github.com/LeonErath/SymSpellAPI
 ```
 
+You can find interactive examples here: https://runkit.com/leonerath/symspell-web-api
+
 You can deploy the code yourself or deploy in a docker container:
 
 ## Docker Container
