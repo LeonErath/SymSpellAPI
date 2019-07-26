@@ -17,5 +17,5 @@ WORKDIR /app
 COPY SymSpellAPI/frequency_dictionary_en_82_765.txt ./
 COPY --from=build /app/SymSpellAPI/out ./
 
-EXPOSE 80
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "SymSpellAPI.dll"]

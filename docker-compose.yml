@@ -9,7 +9,9 @@ networks:
 services:
   symspell:
     build: 
-      .
+      context: .
+      args: 
+        - --no-cache
     ports:
       - "5000:80"
     labels:
