@@ -16,4 +16,6 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY SymSpellAPI/frequency_dictionary_en_82_765.txt ./
 COPY --from=build /app/SymSpellAPI/out ./
+
+EXPOSE 80
 ENTRYPOINT ["dotnet", "SymSpellAPI.dll"]

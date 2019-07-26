@@ -1,0 +1,23 @@
+version: "2"
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
+
+services:
+  symspell:
+    build: 
+      .
+    ports:
+      - "5000:80"
+    labels:
+      - traefik.backend=symspell
+      - traefik.frontend.rule=Host:symspell.erath.dev
+      - traefik.docker.network=proxy
+      - traefik.port=80
+      - traefik.enable=true
+    networks:
+      - internal
+      - proxy
