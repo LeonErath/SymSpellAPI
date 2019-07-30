@@ -22,11 +22,33 @@ namespace SymSpellAPI.Controllers
             return  "API Initialited";
         }
 
+        [HttpGet("lookup")]
+        public List<SymSpell.SuggestItem> lookup([FromQuery(Name = "document")] string document, [FromQuery(Name = "distance")] int distance, [FromQuery(Name = "verbosity")] int verbosity)
+        {
+            try
+            {
+                return SymSpellInterface.Instance.getSuggestions(document, verbosity, distance);
+
+            }
+            catch (Exception e)
+            {
+           
+                return new List<SymSpell.SuggestItem>();
+            }
+        }
+
         [HttpPost("lookup/json")]
         public List<SymSpell.SuggestItem> lookupJSON([FromBody]JObject data)
         {
-            
-            return SymSpellInterface.Instance.getSuggestions(data.GetValue("document").Value<string>(),  data.GetValue("verbosity").Value<int>(), data.GetValue("distance").Value<int>());
+            try
+            {
+                return SymSpellInterface.Instance.getSuggestions(data.GetValue("document").Value<string>(), data.GetValue("verbosity").Value<int>(), data.GetValue("distance").Value<int>());
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message,data);
+                return new List<SymSpell.SuggestItem>();
+            }
         }
 
         

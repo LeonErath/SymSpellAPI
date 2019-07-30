@@ -41,9 +41,18 @@ namespace SymSpellAPI
 
         public List<SymSpell.SuggestItem> getSuggestions(string word,int verbosity,int distance)
         {
-            
-            var suggestions = symSpell.Lookup(word, (SymSpell.Verbosity)verbosity, distance);
-            return suggestions;
+            try
+            {
+               
+                return symSpell.Lookup(word, (SymSpell.Verbosity)verbosity, distance);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message,word,verbosity,distance);
+                return new List<SymSpell.SuggestItem>();
+            }
+          
+           
         }
 
         public List<SymSpell.SuggestItem> correctText(string text, int distance)
