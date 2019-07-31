@@ -1,11 +1,12 @@
 const fs = require("fs");
-const chalk = require("chalk");
 const path = require("path");
 const Hunspell = require("./Hunspell");
 const SymSpell = require("./SymSpell");
 const SpellChecker = require("spellchecker");
+const Timer = require("./Timer");
 
-const testData = path.resolve("./ABODAT.643");
+const FILE = "./ABODAT.643";
+const testData = path.resolve(FILE);
 
 var lineReader = require("readline").createInterface({
 	input: fs.createReadStream(testData)
@@ -31,43 +32,10 @@ async function _getSpellCheckerSuggestion(word) {
 	return suggestions;
 }
 
-async function _getSymHunSuggestions(word) {
-	try {
-		let suggestions = [];
-		let symSug = (await SymSpell.lookup(word, 2, 1)).data;
-
-		if (symSug.length !== undefined) {
-			symSug = [];
-		}
-		symSug = symSug.filter(sug => sug.distance !== 0);
-		if (symSug.length > 4) {
-			symSug = symSug.slice(0, 3);
-		}
-		symSug = symSug.map(sug => sug.term);
-
-		if (SpellChecker.isMisspelled(word)) {
-			suggestions = SpellChecker.getCorrectionsForMisspelling(word);
-		}
-
-		return suggestions;
-	} catch (err) {
-		c++;
-
-		let suggestions = [];
-
-		if (SpellChecker.isMisspelled(word)) {
-			suggestions = SpellChecker.getCorrectionsForMisspelling(word);
-		}
-
-		return suggestions;
-	}
-}
-
 const Algorithm = Object.freeze({
 	Hunspell: 0,
 	SymSpell: 1,
-	SpellChecker: 3,
-	Combined: 4
+	SpellChecker: 3
 });
 
 function Benchmark() {
@@ -108,29 +76,32 @@ function Benchmark() {
 		return new Promise((resolve, reject) => {
 			lineReader
 				.on("line", line => {
-					if (line.charAt(0) !== "$") {
-						let phrases = line.split(", ");
-						phrases = phrases.map(s => s.split(" "));
-						phrases = phrases.map(s => {
-							let incWord = s[0];
-							let word = s[1];
-							incWord = incWord.replace(",", "");
-							word = word.replace(",", "");
-							word = word.trim();
-							incWord = incWord.replace(".", "");
-							incWord = incWord.trim();
-							word = word.replace(".", "");
-							this.phrases.push([incWord, word]);
-						});
+					if (FILE === "./ABODAT.643") {
+						if (line.charAt(0) !== "$") {
+							let phrases = line.split(", ");
+							phrases = phrases.map(s => s.split(" "));
+							phrases = phrases.map(s => {
+								let incWord = s[0];
+								let word = s[1];
+								incWord = incWord.replace(",", "");
+								word = word.replace(",", "");
+								word = word.trim();
+								incWord = incWord.replace(".", "");
+								incWord = incWord.trim();
+								word = word.replace(".", "");
+								this.phrases.push([incWord, word]);
+							});
+						}
 					}
+					if (FILE === "./Wikipedia.txt") {
+						let [incWord, word] = line.split(",");
+						word = word.replace(",", "");
+						word = word.trim();
+						incWord = incWord.replace(",", "");
+						incWord = incWord.trim();
 
-					// let [incWord, word] = line.split(",");
-					// word = word.replace(",", "");
-					// word = word.trim();
-					// incWord = incWord.replace(",", "");
-					// incWord = incWord.trim();
-
-					// this.phrases.push([incWord, word]);
+						this.phrases.push([incWord, word]);
+					}
 				})
 				.on("close", () => {
 					resolve();
@@ -154,7 +125,10 @@ function Benchmark() {
 		return new Promise((resolve, reject) => {
 			let promise = [];
 			let phrasesRes = [];
-			//this.phrases = this.phrases.slice(0, 1000);
+			if (FILE === "./Wikipedia.txt") {
+				// Memory problems with more than 1000 words
+				this.phrases = this.phrases.slice(0, 1000);
+			}
 
 			this.phrases.forEach(s => {
 				let word = s[1];
@@ -177,11 +151,6 @@ function Benchmark() {
 					promise.push(_getSpellCheckerSuggestion(incWord));
 					promise.push(_getSpellCheckerSuggestion(word));
 				}
-
-				if (algorithm === Algorithm.Combined) {
-					promise.push(_getSymHunSuggestions(incWord));
-					promise.push(_getSymHunSuggestions(word));
-				}
 			});
 
 			Promise.all(promise)
@@ -194,27 +163,6 @@ function Benchmark() {
 		});
 	};
 }
-function Timer() {
-	this.startTime = 0;
-	this.endTime = 0;
-	this.start = () => {
-		this.startTime = +new Date();
-	};
-	this.end = () => {
-		this.endTime = +new Date();
-		return this;
-	};
-	this.print = algorithm => {
-		console.log(
-			chalk.green(
-				algorithm,
-				"finnished in",
-				chalk.bold((this.endTime - this.startTime) / 1000),
-				"sec."
-			)
-		);
-	};
-}
 
 const main = async function() {
 	let timer = new Timer();
@@ -223,15 +171,15 @@ const main = async function() {
 	await benchmark.init();
 	timer.end().print("Lines");
 
-	// timer.start();
-	// let result = await benchmark.perform(Algorithm.SymSpell);
-	// console.log("SymSpell", result);
-	// timer.end().print("SymSpell");
+	timer.start();
+	let result = await benchmark.perform(Algorithm.SymSpell);
+	console.log("SymSpell", result);
+	timer.end().print("SymSpell");
 
-	// timer.start();
-	// result = await benchmark.perform(Algorithm.SpellChecker);
-	// console.log("SpellChecker", result);
-	// timer.end().print("SpellChecker");
+	timer.start();
+	result = await benchmark.perform(Algorithm.SpellChecker);
+	console.log("SpellChecker", result);
+	timer.end().print("SpellChecker");
 
 	timer.start();
 	result = await benchmark.perform(Algorithm.Hunspell);
