@@ -40,7 +40,7 @@ I currently evaluated 3 spellchecker in nodejs. Here are my results:
 
 | algorithm         | precision      | recall         | accuracy       | time (in sec.) |
 |-------------------|----------------|----------------|----------------|----------------|
-| nspell            | 98.07923 % | 65.887 % | 82.2983 % | 21.011 s         |
+| nspell            | 98.0861 % | 66.129 % | 82.41935 % | 20.451 s         |
 | SymSpell          | 98.3173 % | 65.96774 % | 82.419 % | 3.793 s           |
 | node-spellchecker | 98.86 % | 70.16129 % | 84.6774 % | 9.165 s          |
 

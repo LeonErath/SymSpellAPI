@@ -1,0 +1,30 @@
+{
+  "name": "sympspell-benchmark",
+  "version": "1.0.0",
+  "description": "Nodejs evaluation of the symspell spellchecker",
+  "main": "BenchmarkSpelling.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonErath/SymSpellAPI.git"
+  },
+  "keywords": [
+    "spellchecker"
+  ],
+  "author": "Leon Erath",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeonErath/SymSpellAPI/issues"
+  },
+  "homepage": "https://github.com/LeonErath/SymSpellAPI#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "chalk": "^2.4.2",
+    "fs": "0.0.1-security",
+    "nspell": "^2.1.2",
+    "path": "^0.12.7",
+    "spellchecker": "^3.7.0"
+  }
+}
