@@ -40,9 +40,28 @@ I currently evaluated 3 spellchecker in nodejs. Here are my results:
 
 | algorithm         | precision      | recall         | accuracy       | time (in sec.) |
 |-------------------|----------------|----------------|----------------|----------------|
-| nspell            | 0.980792316927 % | 0.658870967742 % | 0.822983870968 % | 21.011 s         |
-| SymSpell          | 0.818371607516 % | 0.632258064516 % | 0.745967741935 % | 2.73 s           |
-| node-spellchecker | 0.988636363636 % | 0.701612903226 % | 0.846774193548 % | 9.165 s          |
+| nspell            | 98.07923 % | 65.887 % | 82.2983 % | 21.011 s         |
+| SymSpell          | 98.3173 % | 65.96774 % | 82.419 % | 3.793 s           |
+| node-spellchecker | 98.86 % | 70.16129 % | 84.6774 % | 9.165 s          |
 
 
-Corpus: ABODAT.643 (2480 Words)
+Corpus: [ABODAT.643 from Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) (2480 Words)
+
+| algorithm         | precision      | recall         | accuracy       | time (in sec.) |
+|-------------------|----------------|----------------|----------------|----------------|
+| nspell            | 97.577 % | 88.6 % | 93.2 % | 22.511 s         |
+| SymSpell          | 97.99789 % | 93 % | 95.55 % | 1.999 s           |
+| node-spellchecker | 98.333 % | 94.4 % | 96.4 % | 12.837 s          |
+
+
+Corpus: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines) (the first 1000 Words)
+
+
+| algorithm         | precision      | recall         | accuracy       | time (in sec.) |
+|-------------------|----------------|----------------|----------------|----------------|
+| nspell            | 97.83599 % | 85.9 % | 92 % | 24.63 s         |
+| SymSpell          | 96.868 % | 89.7 % | 93.4 % | 2.489 s           |
+| node-spellchecker | 97.2073 % | 90.5 % | 93.95 % | 12.137 s          |
+
+
+Corpus: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines) (the next 1000-2000 Words)
