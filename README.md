@@ -31,27 +31,20 @@ You can find the Documentation [here](https://documenter.getpostman.com/view/368
 
 I currently evaluated 3 spellchecker in nodejs. Here are my results:
 
-[nspell](https://www.npmjs.com/package/nspell)
-
-[SymSpell](https://github.com/wolfgarbe/SymSpell)
-
-[node-spellchecker](https://github.com/atom/node-spellchecker)
-
-
 | algorithm         | precision      | recall         | accuracy       | time (in sec.) |
 |-------------------|----------------|----------------|----------------|----------------|
-| nspell            | 98.0861 % | 66.129 % | 82.41935 % | 20.451 s         |
-| SymSpell          | 98.3173 % | 65.96774 % | 82.419 % | 3.793 s           |
-| node-spellchecker | 98.86 % | 70.16129 % | 84.6774 % | 9.165 s          |
+| [nspell](https://www.npmjs.com/package/nspell)            | 98.0861 % | 66.129 % | 82.41935 % | 20.451 s         |
+| [SymSpell](https://github.com/wolfgarbe/SymSpell)         | 98.3173 % | 65.96774 % | 82.419 % | 3.793 s           |
+| [node-spellchecker](https://github.com/atom/node-spellchecker) | 98.86 % | 70.16129 % | 84.6774 % | 9.165 s          |
 
 
 Corpus: [ABODAT.643 from Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) (2480 Words)
 
 | algorithm         | precision      | recall         | accuracy       | time (in sec.) |
 |-------------------|----------------|----------------|----------------|----------------|
-| nspell            | 97.577 % | 88.6 % | 93.2 % | 22.511 s         |
-| SymSpell          | 97.99789 % | 93 % | 95.55 % | 1.999 s           |
-| node-spellchecker | 98.333 % | 94.4 % | 96.4 % | 12.837 s          |
+| [nspell](https://www.npmjs.com/package/nspell)              | 97.577 % | 88.6 % | 93.2 % | 22.511 s         |
+| [SymSpell](https://github.com/wolfgarbe/SymSpell)           | 97.99789 % | 93 % | 95.55 % | 1.999 s           |
+|  [node-spellchecker](https://github.com/atom/node-spellchecker)| 98.333 % | 94.4 % | 96.4 % | 12.837 s          |
 
 
 Corpus: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines) (the first 1000 Words)
@@ -59,9 +52,9 @@ Corpus: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_miss
 
 | algorithm         | precision      | recall         | accuracy       | time (in sec.) |
 |-------------------|----------------|----------------|----------------|----------------|
-| nspell            | 97.83599 % | 85.9 % | 92 % | 24.63 s         |
-| SymSpell          | 96.868 % | 89.7 % | 93.4 % | 2.489 s           |
-| node-spellchecker | 97.2073 % | 90.5 % | 93.95 % | 12.137 s          |
+| [nspell](https://www.npmjs.com/package/nspell)            | 97.83599 % | 85.9 % | 92 % | 24.63 s         |
+| [SymSpell](https://github.com/wolfgarbe/SymSpell)           | 96.868 % | 89.7 % | 93.4 % | 2.489 s           |
+|  [node-spellchecker](https://github.com/atom/node-spellchecker)| 97.2073 % | 90.5 % | 93.95 % | 12.137 s          |
 
 
 Corpus: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines) (the next 1000-2000 Words)
